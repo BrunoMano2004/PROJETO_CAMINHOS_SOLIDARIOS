@@ -1,12 +1,6 @@
 package com.caminhosSolidarios.br.CaminhosSolidarios.model
 
-import jakarta.persistence.CascadeType
-import jakarta.persistence.Entity
-import jakarta.persistence.GeneratedValue
-import jakarta.persistence.GenerationType
-import jakarta.persistence.Id
-import jakarta.persistence.JoinColumn
-import jakarta.persistence.OneToOne
+import jakarta.persistence.*
 
 @Entity
 data class Usuario(
@@ -19,5 +13,9 @@ data class Usuario(
     val status: Boolean,
     @JoinColumn(name = "id_endereco")
     @OneToOne(cascade = [CascadeType.REMOVE])
-    val endereco: Endereco
+    val endereco: Endereco,
+    @OneToMany(mappedBy = "usuario", fetch = FetchType.LAZY)
+    val postagens: List<BlogPost> = emptyList(),
+    @OneToMany(mappedBy = "usuario", fetch = FetchType.LAZY)
+    val participacoesProjetos: List<ParticipacaoProjeto> = emptyList()
 )

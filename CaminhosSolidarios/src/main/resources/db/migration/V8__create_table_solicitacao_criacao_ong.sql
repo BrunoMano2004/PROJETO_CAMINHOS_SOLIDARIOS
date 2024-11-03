@@ -1,0 +1,8 @@
+CREATE TABLE solicitacao_criacao_ong(
+    id BIGINT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    status VARCHAR(20) NOT NULL,
+    data TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    motivo VARCHAR(100),
+    id_ong BIGINT NOT NULL,
+    FOREIGN KEY (id_ong) REFERENCES ong(id)
+)
