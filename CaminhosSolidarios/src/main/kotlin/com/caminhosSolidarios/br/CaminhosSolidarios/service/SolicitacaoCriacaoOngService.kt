@@ -1,7 +1,7 @@
 package com.caminhosSolidarios.br.CaminhosSolidarios.service
 
 import com.caminhosSolidarios.br.CaminhosSolidarios.dto.ong.AnaliseSolicitacaoDto
-import com.caminhosSolidarios.br.CaminhosSolidarios.exception.InvalidDataException
+import com.caminhosSolidarios.br.CaminhosSolidarios.exception.InvalidRequestException
 import com.caminhosSolidarios.br.CaminhosSolidarios.exception.ResourceNotFoundException
 import com.caminhosSolidarios.br.CaminhosSolidarios.model.Ong
 import com.caminhosSolidarios.br.CaminhosSolidarios.model.SolicitacaoCriacaoOng
@@ -28,7 +28,12 @@ class SolicitacaoCriacaoOngService(
         solicitacao.apply {
             this.status = Status.APROVADO
             this.motivo = solicitacaoDto.motivo
-            this.ong?.status ?: true
+        }
+
+        val ong = solicitacao.ong
+
+        if (ong != null) {
+            ong.status = true
         }
     }
 
@@ -54,7 +59,7 @@ class SolicitacaoCriacaoOngService(
         if (solicitacao.status == Status.PENDENTE){
             return solicitacao
         } else {
-            throw InvalidDataException("Status da solicitação já definido")
+            throw InvalidRequestException("Status da solicitação já definido")
         }
     }
 }

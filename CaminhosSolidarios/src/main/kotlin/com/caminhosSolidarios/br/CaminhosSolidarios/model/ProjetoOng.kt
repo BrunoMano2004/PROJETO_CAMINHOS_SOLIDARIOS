@@ -1,7 +1,9 @@
 package com.caminhosSolidarios.br.CaminhosSolidarios.model
 
+import com.caminhosSolidarios.br.CaminhosSolidarios.dto.projetoOng.CadastroProjetoOngDto
 import jakarta.persistence.*
 import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 
 @Entity
 class ProjetoOng {
@@ -9,23 +11,31 @@ class ProjetoOng {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long? = null
 
-    val nome: String? = null
+    var nome: String? = null
 
-    val descricao: String? = null
+    var descricao: String? = null
 
-    val dataInicio: LocalDate? = null
+    var dataInicio: LocalDate? = null
 
-    val dataFim: LocalDate? = null
+    var dataFim: LocalDate? = null
 
     @ManyToOne
     @JoinColumn(name = "id_ong")
-    val ong: Ong? = null
+    var ong: Ong? = null
 
     @OneToOne
     @JoinColumn(name = "id_endereco")
-    val endereco: Endereco? = null
+    var endereco: Endereco? = null
 
     @OneToMany(mappedBy = "projetoOng", fetch = FetchType.LAZY)
     val participantes: List<ParticipacaoProjeto> = emptyList()
 
+    constructor(projetoDto: CadastroProjetoOngDto){
+        val dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy")
+
+        this.nome = projetoDto.nome
+        this.descricao = projetoDto.descricao
+        this.dataInicio = LocalDate.parse(projetoDto.dataInicio, dtf)
+        this.dataFim = LocalDate.parse(projetoDto.dataFim, dtf)
+    }
 }

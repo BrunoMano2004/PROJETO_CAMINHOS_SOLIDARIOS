@@ -12,5 +12,5 @@ data class ListagemEnderecoDto(
     val complemento: String?
 ){
 
-    constructor(endereco: Endereco): this(endereco.logradouro, endereco.bairro, endereco.cidade, endereco.estado, endereco.numero, endereco.cep, endereco.complemento)
+    constructor(endereco: Endereco?): this(endereco?.logradouro, endereco?.bairro, endereco?.cidade, endereco?.estado, endereco?.numero, endereco?.cep, endereco?.complemento)
 }

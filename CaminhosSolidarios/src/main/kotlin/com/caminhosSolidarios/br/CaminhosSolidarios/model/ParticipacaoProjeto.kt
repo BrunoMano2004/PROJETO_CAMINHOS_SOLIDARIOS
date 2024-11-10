@@ -9,16 +9,24 @@ import jakarta.persistence.ManyToOne
 import java.time.LocalDate
 
 @Entity
-data class ParticipacaoProjeto(
+class ParticipacaoProjeto{
+
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Long,
-    val dataInicio: LocalDate,
-    val dataFim: LocalDate? = null,
-    val funcaoVoluntario: String,
+    val id: Long? = null
+
+    val dataInicio: LocalDate = LocalDate.now()
+
+    val dataFim: LocalDate? = null
+
+    var funcaoVoluntario: String? = null
+
+    var status: Boolean = false
+
     @ManyToOne
     @JoinColumn(name = "id_usuario")
-    val usuario: Usuario,
+    var usuario: Usuario? = null
+
     @ManyToOne
     @JoinColumn(name = "id_projeto")
-    val projetoOng: ProjetoOng
-)
+    var projetoOng: ProjetoOng? = null
+}

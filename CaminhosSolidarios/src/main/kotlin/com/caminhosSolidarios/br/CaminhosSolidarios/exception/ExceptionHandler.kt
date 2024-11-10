@@ -13,8 +13,8 @@ class ExceptionHandler {
         return ResponseEntity(ex.message, HttpStatus.NOT_FOUND)
     }
 
-    @ExceptionHandler(InvalidDataException::class)
-    fun tratarInvalidData(ex: InvalidDataException): ResponseEntity<String>{
+    @ExceptionHandler(InvalidRequestException::class)
+    fun tratarInvalidData(ex: InvalidRequestException): ResponseEntity<String>{
         return ResponseEntity(ex.message, HttpStatus.BAD_REQUEST)
     }
 }

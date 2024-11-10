@@ -4,16 +4,22 @@ import jakarta.persistence.*
 import java.time.LocalDate
 
 @Entity
-data class SolicitacaoParticipacao(
+class SolicitacaoParticipacao{
+
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Long,
-    val status: Boolean,
-    val data: LocalDate,
-    val motivo: String,
+    val id: Long? = null
+
+    val status: Status = Status.PENDENTE
+
+    val data: LocalDate = LocalDate.now()
+
+    val motivo: String? = null
+
     @ManyToOne
     @JoinColumn(name = "id_usuario")
-    val usuario: Usuario,
+    var usuario: Usuario? = null
+
     @OneToOne
     @JoinColumn(name = "id_participacao_projeto")
-    val participacaoProjeto: ParticipacaoProjeto
-)
+    var participacaoProjeto: ParticipacaoProjeto? = null
+}
