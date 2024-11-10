@@ -5,15 +5,20 @@ import com.caminhosSolidarios.br.CaminhosSolidarios.dto.usuario.CadastroUsuarioD
 import jakarta.persistence.*
 
 @Entity
-data class Usuario(
+class Usuario {
+
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Long? = null,
-    var nomeCompleto: String,
-    var email: String,
-    var cpf: String,
-    var telefone: String,
-    var status: Boolean = true,
-){
+    val id: Long? = null
+
+    var nomeCompleto: String? = null
+
+    var email: String? = null
+
+    var cpf: String? = null
+
+    var telefone: String? = null
+
+    var status: Boolean = true
 
     @JoinColumn(name = "id_endereco")
     @OneToOne(cascade = [CascadeType.REMOVE])
@@ -25,7 +30,12 @@ data class Usuario(
     @OneToMany(mappedBy = "usuario", fetch = FetchType.LAZY)
     val participacoesProjetos: List<ParticipacaoProjeto> = emptyList()
 
-    constructor(cadastroUsuario: CadastroUsuarioDto): this(null, cadastroUsuario.nomeCompleto, cadastroUsuario.email, cadastroUsuario.cpf, cadastroUsuario.telefone)
+    constructor(cadastroUsuario: CadastroUsuarioDto){
+        this.nomeCompleto = cadastroUsuario.nomeCompleto
+        this.email = cadastroUsuario.email
+        this.cpf = cadastroUsuario.cpf
+        this.telefone = cadastroUsuario.telefone
+    }
 
     fun atualizar(atualizacaoUsuario: AtualizacaoUsuarioDto){
         if (atualizacaoUsuario.nomeCompleto != null){

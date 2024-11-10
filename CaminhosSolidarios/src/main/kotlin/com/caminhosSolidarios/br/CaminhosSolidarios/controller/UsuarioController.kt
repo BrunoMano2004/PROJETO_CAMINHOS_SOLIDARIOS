@@ -22,7 +22,7 @@ class UsuarioController(
     private val usuarioService: UsuarioService
 ) {
 
-    @PostMapping("/cadastro")
+    @PostMapping("/cadastrar")
     fun cadastroUsuario(@RequestBody cadastroUsuario: CadastroUsuarioDto): ResponseEntity<String>{
         usuarioService.criarUsuario(cadastroUsuario)
         return ResponseEntity("", HttpStatus.CREATED)
@@ -34,12 +34,12 @@ class UsuarioController(
         return ResponseEntity(usuario, HttpStatus.OK)
     }
 
-    @PatchMapping("/atuializar/{id}")
+    @PatchMapping("/atualizar/{id}")
     @Transactional
     fun atualizarUsuario(@PathVariable id: Long,
                          @RequestBody atualizacaoUsuario: AtualizacaoUsuarioDto): ResponseEntity<String>
     {
-        usuarioService.atualizarDadosUsuario(atualizacaoUsuario)
+        usuarioService.atualizarDadosUsuario(id, atualizacaoUsuario)
         return ResponseEntity("Usuário atualizado com sucesso!", HttpStatus.OK)
     }
 }

@@ -31,7 +31,10 @@ class UsuarioService(
         return ListagemUsuarioDto(usuario)
     }
 
-    fun atualizarDadosUsuario(atualizacaoUsuario: AtualizacaoUsuarioDto){
-
+    fun atualizarDadosUsuario(id: Long, atualizacaoUsuario: AtualizacaoUsuarioDto){
+        val usuario = usuarioRepository.findById(id).orElseThrow{
+            ResourceNotFoundException("Usuário não encontrado!")
+        }
+        usuario.atualizar(atualizacaoUsuario)
     }
 }

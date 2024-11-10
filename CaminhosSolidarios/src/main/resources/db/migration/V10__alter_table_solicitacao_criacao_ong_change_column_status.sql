@@ -1,0 +1,1 @@
+ALTER TABLE solicitacao_criacao_ong CHANGE COLUMN status status VARCHAR(9) NOT NULL

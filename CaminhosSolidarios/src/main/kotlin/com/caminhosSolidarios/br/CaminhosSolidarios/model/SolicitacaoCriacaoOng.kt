@@ -1,16 +1,26 @@
 package com.caminhosSolidarios.br.CaminhosSolidarios.model
 
 import jakarta.persistence.*
-import java.time.LocalDate
+import java.time.LocalDateTime
 
 @Entity
-data class SolicitacaoCriacaoOng(
+class SolicitacaoCriacaoOng {
+
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Long,
-    val status: Boolean,
-    val data: LocalDate,
-    val motivo: String,
+    val id: Long? = null
+
+    @Enumerated(EnumType.STRING)
+    var status: Status = Status.PENDENTE
+
+    val data: LocalDateTime = LocalDateTime.now()
+
+    var motivo: String? = null
+
     @OneToOne
     @JoinColumn(name = "id_ong")
-    val ong: Ong
-)
+    var ong: Ong? = null
+
+    constructor(ong: Ong){
+        this.ong = ong
+    }
+}

@@ -3,12 +3,12 @@ package com.caminhosSolidarios.br.CaminhosSolidarios.dto.endereco
 import com.caminhosSolidarios.br.CaminhosSolidarios.model.Endereco
 
 data class ListagemEnderecoDto(
-    val logradouto: String,
-    val bairro: String,
-    val cidade: String,
-    val estado: String,
-    val numero: String,
-    val cep: String,
+    val logradouto: String?,
+    val bairro: String?,
+    val cidade: String?,
+    val estado: String?,
+    val numero: String?,
+    val cep: String?,
     val complemento: String?
 ){
 

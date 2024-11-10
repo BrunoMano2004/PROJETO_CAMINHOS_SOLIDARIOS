@@ -12,4 +12,9 @@ class ExceptionHandler {
     fun tratarResourceNotFound(ex: ResourceNotFoundException): ResponseEntity<String>{
         return ResponseEntity(ex.message, HttpStatus.NOT_FOUND)
     }
+
+    @ExceptionHandler(InvalidDataException::class)
+    fun tratarInvalidData(ex: InvalidDataException): ResponseEntity<String>{
+        return ResponseEntity(ex.message, HttpStatus.BAD_REQUEST)
+    }
 }

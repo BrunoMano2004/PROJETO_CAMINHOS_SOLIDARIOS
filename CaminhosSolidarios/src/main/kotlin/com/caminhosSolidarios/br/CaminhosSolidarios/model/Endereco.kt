@@ -4,25 +4,32 @@ import com.caminhosSolidarios.br.CaminhosSolidarios.dto.endereco.CadastroEnderec
 import jakarta.persistence.*
 
 @Entity
-data class Endereco(
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Long? = null,
-    val logradouro: String,
-    val bairro: String,
-    val cidade: String,
-    val estado: String,
-    val numero: String,
-    val cep: String,
-    val complemento: String?
-){
+class Endereco {
 
-    constructor(cadastroEndereco: CadastroEnderecoDto): this(
-        null,
-        cadastroEndereco.logradouro,
-        cadastroEndereco.bairro,
-        cadastroEndereco.cidade,
-        cadastroEndereco.estado,
-        cadastroEndereco.numero,
-        cadastroEndereco.cep,
-        null)
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    val id: Long? = null
+
+    var logradouro: String? = null
+
+    var bairro: String? = null
+
+    var cidade: String? = null
+
+    var estado: String? = null
+
+    var numero: String? = null
+
+    var cep: String? = null
+
+    var complemento: String? = null
+
+    constructor(cadastroEndereco: CadastroEnderecoDto){
+        this.logradouro = cadastroEndereco.logradouro
+        this.bairro = cadastroEndereco.bairro
+        this.cidade = cadastroEndereco.cidade
+        this.estado = cadastroEndereco.estado
+        this.numero = cadastroEndereco.numero
+        this.cep = cadastroEndereco.cep
+        this.complemento = cadastroEndereco.complemento
+    }
 }
